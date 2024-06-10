@@ -1,5 +1,6 @@
-import { Controller, Logger, Post, Get } from '@nestjs/common';
-import { UserService } from './user.service';
+import { Controller, Logger, Post, Get, Body } from '@nestjs/common';
+import { UserService } from '../service/user.service';
+import { CreateUserDto } from '../dto/createUserDto';
 
 @Controller('user')
 export class UserController {
@@ -10,11 +11,12 @@ export class UserController {
 
 
     @Post('/create')
-    async createUser(){
+    async createUser(@Body() createUserDto: CreateUserDto ){
 
         try{
 
-            return "this creates a user"
+            this.logger.log(UserController.name, createUserDto)
+            return await this.userService.create(createUserDto)
 
         }catch(error){
             this.logger.error(UserController.name, error)
