@@ -119,7 +119,7 @@ export class UserService {
     id: number
   ){
 
-    const existingUser = await this.repo.findOne({where: {id}})
+    const existingUser = await this.repo.findOneBy({id})
 
     if (!existingUser){
       throw new NotFoundException("UserID not found!")

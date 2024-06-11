@@ -1,4 +1,4 @@
-import { Controller, Logger, Post, Get, Body, Query, Search, Param } from '@nestjs/common';
+import { Controller, Logger, Post, Get, Body, Query, Patch } from '@nestjs/common';
 import { UserService } from '../service/user.service';
 import { CreateUserDto } from '../dto/createUserDto';
 import { UpdateUserDto } from '../dto/updateUserDto';
@@ -55,7 +55,7 @@ export class UserController {
     }
 
 
-    @Post('/update')
+    @Patch('/update')
     async updateUser(
         @Body() updatedUserDto: UpdateUserDto, 
         @Query('id') id: number
