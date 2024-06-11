@@ -97,4 +97,20 @@ export class BabyService {
         }
     }
 
+    async getOne(
+        id: number
+    ){
+
+        const existingBaby = await this.babyRepo.findOneBy({id})
+
+        if (!existingBaby){
+            throw new NotFoundException("Baby not found!")
+        }
+
+        return{
+            status: "Ok",
+            message: "Baby found successfully",
+            data: existingBaby
+        }
+    }
 }

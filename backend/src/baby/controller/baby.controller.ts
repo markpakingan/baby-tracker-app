@@ -42,11 +42,13 @@ export class BabyController {
 
 
     @Get('/getone')
-    async getOnebaby(){
+    async getOnebaby(
+        @Query('id') id: number
+    ){
 
 
         try{
-            return "this baby GETONE is working"
+            return await this.babyService.getOne(id)
         }catch(error){
             this.logger.error(BabyController.name, error)
             throw error;
