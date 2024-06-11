@@ -1,6 +1,7 @@
-import { Controller, Logger, Post, Get, Body } from '@nestjs/common';
+import { Controller, Logger, Post, Get, Body, Query, Search, Param } from '@nestjs/common';
 import { UserService } from '../service/user.service';
 import { CreateUserDto } from '../dto/createUserDto';
+import { UpdateUserDto } from '../dto/updateUserDto';
 
 @Controller('user')
 export class UserController {
@@ -15,7 +16,6 @@ export class UserController {
 
         try{
 
-            this.logger.log(UserController.name, createUserDto)
             return await this.userService.create(createUserDto)
 
         }catch(error){
@@ -25,9 +25,17 @@ export class UserController {
     }
 
     @Get('/getall')
-    async getAllUser(){
+    async getAllUser(
+        @Query('page') page: number, 
+        @Query('order') order: string,
+        @Query('size') size: number, 
+    ){
         try{
-            return "this get all users"
+            return await this.userService.getAll(
+                page, 
+                order, 
+                size
+            )
         }catch(error){
             this.logger.error(UserController.name, error)
             throw error;
@@ -35,9 +43,11 @@ export class UserController {
     }
 
     @Get('/getone')
-    async getOneUser(){
+    async getOneUser(
+        @Query('id') id:number
+    ){
         try{
-            return "this get one user"
+            return await this.userService.getOne(id)
         }catch(error){
             this.logger.error(UserController.name, error)
             throw error;
@@ -46,9 +56,12 @@ export class UserController {
 
 
     @Post('/update')
-    async updateUser(){
+    async updateUser(
+        @Body() updatedUserDto: UpdateUserDto, 
+        @Query('id') id: number
+    ){
         try{
-            return "this update a user"
+            return await this.userService.update(updatedUserDto, id)
         }catch(error){
             this.logger.error(UserController.name, error)
             throw error;
