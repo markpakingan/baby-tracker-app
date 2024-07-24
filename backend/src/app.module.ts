@@ -8,6 +8,7 @@ import { UserModule } from "./user/user.module";
 import { UserEntity } from "./user/user.entity";
 import { BabyModule } from './baby/baby.module';
 import { BabyEntity } from "./baby/baby.entity";
+import { NapTimeModule } from './nap_time/nap_time.module';
 
 
 @Module({
@@ -40,7 +41,8 @@ import { BabyEntity } from "./baby/baby.entity";
             }),
         }),
         UserModule,
-        BabyModule, 
+        BabyModule,
+        NapTimeModule, 
     ],
     controllers: [AppController],
     providers: [AppService],

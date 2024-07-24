@@ -34,6 +34,7 @@ export class BabyController {
 
         try{
             return await this.babyService.getAll(page, size, order)
+
         }catch(error){
             this.logger.error(BabyController.name, error)
             throw error;
