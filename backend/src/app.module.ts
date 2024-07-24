@@ -8,7 +8,8 @@ import { UserModule } from "./user/user.module";
 import { UserEntity } from "./user/user.entity";
 import { BabyModule } from './baby/baby.module';
 import { BabyEntity } from "./baby/baby.entity";
-import { NapTimeModule } from './nap_time/nap_time.module';
+import { NapTimeModule } from './naptime/naptime.module';
+import { NapTimeEntity } from "./naptime/naptime.entity";
 
 
 @Module({
@@ -26,7 +27,7 @@ import { NapTimeModule } from './nap_time/nap_time.module';
                 username: configService.get<string>("DB_USER"),
                 password: configService.get<string>("DB_PASS"),
                 database: configService.get<string>("DB_NAME"),
-                entities: [UserEntity, BabyEntity],
+                entities: [UserEntity, BabyEntity, NapTimeEntity],
                 synchronize: true,
             }),
         }),

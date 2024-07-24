@@ -1,5 +1,5 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { NapTimeService } from './nap_time.service';
+import { NapTimeService } from './naptime.service';
 
 describe('NapTimeService', () => {
   let service: NapTimeService;
@@ -16,3 +16,5 @@ describe('NapTimeService', () => {
     expect(service).toBeDefined();
   });
 });
+
+

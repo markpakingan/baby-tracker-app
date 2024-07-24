@@ -1,5 +1,5 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { NapTimeController } from './nap_time.controller';
+import { NapTimeController } from './naptime.controller';
 
 describe('NapTimeController', () => {
   let controller: NapTimeController;
