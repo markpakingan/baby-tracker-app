@@ -1,4 +1,5 @@
-import { BaseEntity, PrimaryGeneratedColumn, Column, Entity } from 'typeorm';
+import { NapTimeEntity } from 'src/naptime/naptime.entity';
+import { BaseEntity, PrimaryGeneratedColumn, Column, Entity, OneToMany } from 'typeorm';
 
 @Entity({name: "user", synchronize: true})
 export class UserEntity extends BaseEntity{
@@ -14,6 +15,9 @@ export class UserEntity extends BaseEntity{
     
     @Column()
     email: string;
+
+    @OneToMany(()=> NapTimeEntity, naptime => naptime.userId)
+    naptimes: NapTimeEntity
 
 }
 

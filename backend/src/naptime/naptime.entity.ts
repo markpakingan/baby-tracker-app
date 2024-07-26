@@ -1,5 +1,6 @@
-import { BaseEntity, PrimaryGeneratedColumn, Column, Entity, OneToOne, JoinColumn } from 'typeorm';
+import { BaseEntity, PrimaryGeneratedColumn, Column, Entity, OneToOne, JoinColumn, ManyToOne} from 'typeorm';
 import { BabyEntity } from 'src/baby/baby.entity';
+import { UserEntity } from 'src/user/user.entity';
 
 
 @Entity({name: "naptime", synchronize: true})
@@ -12,11 +13,14 @@ export class NapTimeEntity extends BaseEntity{
     @JoinColumn({name: "babyId"})
     babyId: number;
     
-
+    @ManyToOne( () => UserEntity, user=> user.naptimes)
+    @JoinColumn({ name: "userId"})
+    userId: number;
 
     @Column()
-    date: Date;
+    date: string;
 
 
 }
+
 
