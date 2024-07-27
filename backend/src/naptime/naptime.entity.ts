@@ -11,11 +11,11 @@ export class NapTimeEntity extends BaseEntity{
 
     @OneToOne(()=> BabyEntity)
     @JoinColumn({name: "babyId"})
-    babyId: number;
+    babyId: BabyEntity;
     
     @ManyToOne( () => UserEntity, user=> user.naptimes)
     @JoinColumn({ name: "userId"})
-    userId: number;
+    userId: UserEntity;
 
     @Column()
     date: string;

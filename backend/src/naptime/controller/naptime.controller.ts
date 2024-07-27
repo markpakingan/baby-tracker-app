@@ -1,7 +1,8 @@
-import { Controller, Logger, Body} from '@nestjs/common';
+import { Controller, Logger, Body, Query} from '@nestjs/common';
 import { NapTimeService } from '../service/naptime.service';
 import { Post, Get, Patch } from '@nestjs/common';
 import { CreateNapTimeDto } from '../dto/createNaptime.dto';
+
 @Controller('naptime')
 export class NapTimeController {
 
@@ -27,10 +28,13 @@ export class NapTimeController {
 
     @Get('/getall')
     async getAllNapTime(
+        @Query('page') page: number, 
+        @Query('size') size: number, 
+        @Query('order') order: string
   ){
 
         try{
-            return "Get All is working"
+            return this.napTimeService.getAll(page, size, order)
 
         }catch(error){
             this.logger.error(NapTimeController.name, error)
@@ -41,10 +45,11 @@ export class NapTimeController {
 
     @Get('/getone')
     async getOneNapTime(
+        @Query('id') naptime_id: number
   ){
 
         try{
-            return "Get One is working"
+            return this.napTimeService.getOne(naptime_id)
 
         }catch(error){
             this.logger.error(NapTimeController.name, error)

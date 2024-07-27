@@ -1,14 +1,11 @@
 import {IsDateString, IsInt } from "class-validator";
 
-export class CreateNapTimeDto{
+export class GetOneResponseDto{
 
-    @IsDateString()
     date: string; 
 
-    @IsInt()
-    babyId: number; 
+    baby_id: number; 
 
-    @IsInt()
     userId: number; 
     
 }
