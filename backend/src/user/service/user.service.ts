@@ -71,7 +71,6 @@ export class UserService {
           dto.id = user.id; 
           dto.username = user.username; 
           dto.email = user.email; 
-          dto.password = user.password; 
 
           return dto;
 
