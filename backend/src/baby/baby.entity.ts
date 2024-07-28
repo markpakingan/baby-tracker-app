@@ -1,4 +1,4 @@
-import { BaseEntity, PrimaryGeneratedColumn, Column, Entity, OneToOne, JoinColumn } from 'typeorm';
+import { BaseEntity, PrimaryGeneratedColumn, Column, Entity, ManyToOne, JoinColumn } from 'typeorm';
 import { Gender } from './gender.enum';
 import { UserEntity } from 'src/user/user.entity';
 
@@ -9,9 +9,9 @@ export class BabyEntity extends BaseEntity{
     @PrimaryGeneratedColumn()
     id:number;
 
-    @OneToOne(()=> UserEntity)
+    @ManyToOne(()=> UserEntity, user => user.babies )
     @JoinColumn({name: "userId"})
-    userId: number;
+    user: UserEntity;
 
     @Column()
     name: string; 

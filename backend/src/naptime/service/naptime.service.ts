@@ -6,7 +6,6 @@ import { UserEntity } from 'src/user/user.entity';
 import { CreateNapTimeDto } from '../dto/createNaptime.dto';
 import { BabyEntity } from 'src/baby/baby.entity';
 import { GetOneResponseDto } from '../dto/getOneResponse.dto';
-import { match } from 'assert';
 
 @Injectable()
 export class NapTimeService {
@@ -45,7 +44,7 @@ export class NapTimeService {
         const matchedBaby = await this.babyRepo.findOne({
             where: {
                 id: createNapTimeDto.babyId, 
-                userId: createNapTimeDto.userId,
+                // user: createNapTimeDto.userId,
             }
         })
 

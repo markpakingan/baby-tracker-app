@@ -41,7 +41,7 @@ export class BabyService {
         //Save to baby entity
         const newBaby = new BabyEntity;
 
-        newBaby.userId= existingUser.id;
+        newBaby.user= existingUser;
         newBaby.name = createBabyDto.name; 
         newBaby.dateOfBirth = new Date(createBabyDto.dateOfBirth)
         newBaby.gender = createBabyDto.gender;
@@ -81,7 +81,7 @@ export class BabyService {
 
             const dto = new BabyEntity
 
-            dto.userId = baby.id; 
+            dto.id = baby.id; 
             dto.name = baby.name;
             dto.dateOfBirth = baby.dateOfBirth;
             dto.gender = baby.gender;

@@ -101,7 +101,6 @@ export class UserService {
       foundUser.id = existingUser.id;
       foundUser.username = existingUser.username; 
       foundUser.email = existingUser.email; 
-      foundUser.password = existingUser.password; 
 
 
       return {
@@ -129,12 +128,17 @@ export class UserService {
     existingUser.password = updateUserDto.password; 
     existingUser.email = updateUserDto.email;
 
-    const updatedUser = await this.repo.save(existingUser)
+    await this.repo.save(existingUser)
 
     return {
       status :"Updated",
       message : "Record successfully updated",
-      data : updatedUser
+      data : {
+        "id": existingUser.id,
+        "username": existingUser.username,
+        "email": existingUser.email,
+        "password": "*******"
+      }
     }
 
   }

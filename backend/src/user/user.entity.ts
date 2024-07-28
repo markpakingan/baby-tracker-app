@@ -1,3 +1,4 @@
+import { BabyEntity } from 'src/baby/baby.entity';
 import { NapTimeEntity } from 'src/naptime/naptime.entity';
 import { BaseEntity, PrimaryGeneratedColumn, Column, Entity, OneToMany } from 'typeorm';
 
@@ -18,6 +19,10 @@ export class UserEntity extends BaseEntity{
 
     @OneToMany(()=> NapTimeEntity, naptime => naptime.userId)
     naptimes: NapTimeEntity
+
+    @OneToMany(()=> BabyEntity, baby => baby.user)
+    babies: BabyEntity[];
+
 
 }
 
