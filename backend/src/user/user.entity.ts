@@ -17,7 +17,7 @@ export class UserEntity extends BaseEntity{
     @Column()
     email: string;
 
-    @OneToMany(()=> NapTimeEntity, naptime => naptime.userId)
+    @OneToMany(()=> NapTimeEntity, naptime => naptime.user)
     naptimes: NapTimeEntity
 
     @OneToMany(()=> BabyEntity, baby => baby.user)

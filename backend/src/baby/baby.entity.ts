@@ -1,6 +1,7 @@
-import { BaseEntity, PrimaryGeneratedColumn, Column, Entity, ManyToOne, JoinColumn } from 'typeorm';
+import { BaseEntity, PrimaryGeneratedColumn, Column, Entity, ManyToOne, JoinColumn, OneToMany} from 'typeorm';
 import { Gender } from './gender.enum';
 import { UserEntity } from 'src/user/user.entity';
+import { NapTimeEntity } from 'src/naptime/naptime.entity';
 
 
 @Entity({name: "baby", synchronize: true})
@@ -23,5 +24,7 @@ export class BabyEntity extends BaseEntity{
     @Column({ type: 'enum', enum: Gender, default: Gender.male})
     gender: Gender;
 
+    @OneToMany(()=> NapTimeEntity, naptime => naptime.babies)
+    naptimes: NapTimeEntity;
 }
 

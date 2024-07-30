@@ -30,8 +30,8 @@ export class NapTimeService {
         createNapTimeDto: CreateNapTimeDto
     ){
 
+        //checks if user is existing
         const existingUser = await this.userRepo.findOneBy({id: createNapTimeDto.userId})
-
         if(!existingUser){
             throw new NotFoundException({
                 status: "Error", 
@@ -40,11 +40,11 @@ export class NapTimeService {
         }
 
 
-        //checks if a baby_id belongs to a user_id
+        //checks if a babyId matches UserId
         const matchedBaby = await this.babyRepo.findOne({
             where: {
-                id: createNapTimeDto.babyId, 
-                // user: createNapTimeDto.userId,
+                id: createNapTimeDto.babyId,
+                user: existingUser
             }
         })
 
@@ -59,16 +59,22 @@ export class NapTimeService {
         const newNaptime = new NapTimeEntity;
 
         newNaptime.date = createNapTimeDto.date;
-        newNaptime.babyId = matchedBaby;
-        newNaptime.userId = existingUser; 
+        newNaptime.baby = matchedBaby;
+        newNaptime.user = existingUser; 
         await this.napTimeRepo.save(newNaptime)
 
         return{
             status: "OK",
             message: "New naptime created successfully", 
-            data: newNaptime
+            data: {
+                date: createNapTimeDto.date,
+                babyId: createNapTimeDto.babyId,
+                userId: createNapTimeDto.userId
+
+            }
         }
     }
+
 
 
     async getAll(

@@ -9,13 +9,13 @@ export class NapTimeEntity extends BaseEntity{
     @PrimaryGeneratedColumn()
     id:number;
 
-    @OneToOne(()=> BabyEntity)
+    @ManyToOne(()=> BabyEntity, baby => baby.naptimes)
     @JoinColumn({name: "babyId"})
-    babyId: BabyEntity;
+    babies: BabyEntity;
     
     @ManyToOne( () => UserEntity, user=> user.naptimes)
     @JoinColumn({ name: "userId"})
-    userId: UserEntity;
+    user: UserEntity;
 
     @Column()
     date: string;
