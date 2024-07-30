@@ -17,7 +17,7 @@ export class BabyEntity extends BaseEntity{
     name: string; 
     
     @Column()
-    dateOfBirth: Date;
+    dateOfBirth: string;
 
 
     @Column({ type: 'enum', enum: Gender, default: Gender.male})

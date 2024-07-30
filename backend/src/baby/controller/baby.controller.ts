@@ -1,6 +1,7 @@
 import { Controller, Post, Get, Patch, Logger, Body, Query } from '@nestjs/common';
 import { BabyService } from '../service/baby.service';
 import { CreateBabyDto } from '../dto/createBabyDto';
+import { UpdateBabyDto } from '../dto/updateBabyDto';
 
 @Controller('baby')
 export class BabyController {
@@ -58,11 +59,14 @@ export class BabyController {
 
 
     @Patch('/update')
-    async updateBaby(){
+    async updateBaby(
+        @Query('id') babyId: number,
+        @Body() updateBabyDto : UpdateBabyDto
+    ){
 
 
         try{
-            return "this baby UPDATE is working"
+            return this.babyService.update(babyId, updateBabyDto)
         }catch(error){
             this.logger.error(BabyController.name, error)
             throw error;
