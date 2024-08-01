@@ -2,6 +2,7 @@ import { Controller, Logger, Body, Query} from '@nestjs/common';
 import { NapTimeService } from '../service/naptime.service';
 import { Post, Get, Patch } from '@nestjs/common';
 import { CreateNapTimeDto } from '../dto/createNaptime.dto';
+import { UpdateNapTimeResponse } from '../dto/updateNapTimeResponse.dto';
 
 @Controller('naptime')
 export class NapTimeController {
@@ -59,10 +60,12 @@ export class NapTimeController {
 
     @Patch('/update')
     async UpdateNapTime(
+        @Query('id') naptimeId : number,
+        @Body() UpdateNapTimeResponse: UpdateNapTimeResponse
   ){
 
         try{
-            return "Update is working"
+            return this.napTimeService.update(naptimeId, UpdateNapTimeResponse)
 
         }catch(error){
             this.logger.error(NapTimeController.name, error)

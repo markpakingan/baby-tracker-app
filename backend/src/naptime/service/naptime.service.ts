@@ -59,7 +59,7 @@ export class NapTimeService {
         const newNaptime = new NapTimeEntity;
 
         newNaptime.date = createNapTimeDto.date;
-        newNaptime.baby = matchedBaby;
+        newNaptime.babies = matchedBaby;
         newNaptime.user = existingUser; 
         await this.napTimeRepo.save(newNaptime)
 
@@ -103,8 +103,8 @@ export class NapTimeService {
             const dto = new NapTimeEntity; 
 
             dto.date = naptime.date;
-            dto.babyId = naptime.babyId; 
-            dto.userId = naptime.userId; 
+            dto.babies = naptime.babies; 
+            dto.user = naptime.user; 
 
             return dto
         })
@@ -139,16 +139,47 @@ export class NapTimeService {
         const response = new GetOneResponseDto()
 
         response.date = existingNaptTimeId.date;
-        response.baby_id = existingNaptTimeId.babyId.id;
-        response.userId = existingNaptTimeId.userId.id;
+        response.baby_id = existingNaptTimeId.babies.id;
+        response.userId = existingNaptTimeId.user.id;
 
         return response;
 
     }
 
-    async update(){
+    async update(
+        naptime_id,
+        updateNapTimeResponse
+    ){
+        
+        const existingNaptTime = await this.napTimeRepo.findOneBy({id: naptime_id});
 
+        if(! existingNaptTime){
+            throw new NotFoundException({
+                status: "error", 
+                message: "Data not found!"
+            })
+        }
+    
+
+        //update existingNaptime
+        existingNaptTime.babies = existingNaptTime.babies;
+        existingNaptTime.user = existingNaptTime.user;
+        existingNaptTime.date = updateNapTimeResponse.date;
+        
+        const updatedNaptime = await this.napTimeRepo.save(existingNaptTime)
+
+        return {
+
+            status: "ok", 
+            message: "Naptime successfully updated",
+            data: updatedNaptime
+        }
     }
+
+    // id:number;
+    // babies: BabyEntity;
+    // user: UserEntity;
+    // date: string;
 
 
 }
