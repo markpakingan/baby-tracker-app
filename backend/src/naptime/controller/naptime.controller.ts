@@ -61,11 +61,11 @@ export class NapTimeController {
     @Patch('/update')
     async UpdateNapTime(
         @Query('id') naptimeId : number,
-        @Body() UpdateNapTimeResponse: UpdateNapTimeResponse
+        @Body() updateNapTimeResponse: UpdateNapTimeResponse
   ){
 
         try{
-            return this.napTimeService.update(naptimeId, UpdateNapTimeResponse)
+            return this.napTimeService.update(naptimeId, updateNapTimeResponse)
 
         }catch(error){
             this.logger.error(NapTimeController.name, error)

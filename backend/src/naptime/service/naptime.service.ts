@@ -80,6 +80,7 @@ export class NapTimeService {
     async getAll(
         page: number, 
         size: number, 
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
         order: string
     ){
         const take = size || 5 
