@@ -92,7 +92,7 @@ export class NapTimeService {
             order:{
                 id: 'ASC'
             }, 
-            relations: ['babyId', 'userId'],
+            relations: ['babies', 'user'],
         })
 
         const [result, total] = data
@@ -127,7 +127,7 @@ export class NapTimeService {
 
         const existingNaptTimeId = await this.napTimeRepo.findOne({
             where: {id: naptime_id},
-            relations: ['babyId', 'userId']
+            relations: ['babies', 'user']
     })
 
         if(!existingNaptTimeId){
