@@ -22,6 +22,7 @@ export class NapTimeController {
             return this.napTimeService.create(createNapTimeDto)
 
         }catch(error){
+            console.error('error creating naptime', error)
             this.logger.error(NapTimeController.name, error);
             throw error
         }
